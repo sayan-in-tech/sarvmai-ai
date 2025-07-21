@@ -1,6 +1,6 @@
 import sys
 import os
-from fastapi import FastAPI, Query, HTTPException
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import List
 from fastapi.staticfiles import StaticFiles
@@ -9,24 +9,15 @@ from fastapi.templating import Jinja2Templates
 from fastapi import Request
 import pathlib
 
-# Add the other-project/libindic/spellchecker to sys.path for import
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../other-project/libindic/spellchecker')))
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../other-project/libindic')))
+# Import the local spellchecker module (to be created)
+from main_project.spellchecker_ml import MalayalamSpellChecker
 
-try:
-    from Malayalam import Malayalam
-except ImportError:
-    from libindic.spellchecker.Malayalam import Malayalam
-
-app = FastAPI(title="Malayalam Spellchecker API")
-
-# Initialize the spellchecker
-spellchecker = Malayalam()
+app = FastAPI(title="Indic Spellchecker API")
 
 SUPPORTED_LANGUAGES = {
     'ml': {
         'name': 'Malayalam',
-        'spellchecker': Malayalam(),
+        'spellchecker': MalayalamSpellChecker(),
     },
     # Add more languages here in the future
 }
@@ -66,7 +57,7 @@ def check_and_suggest(request: SpellCheckRequest):
     result['language'] = lang
     return result
 
-# Set up static and template directories
+# Static and template serving
 BASE_DIR = pathlib.Path(__file__).parent
 static_dir = BASE_DIR / "static"
 templates_dir = BASE_DIR / "templates"

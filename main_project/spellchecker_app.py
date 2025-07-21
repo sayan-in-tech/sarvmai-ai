@@ -10,14 +10,27 @@ from fastapi import Request
 import pathlib
 
 # Import the local spellchecker module (to be created)
-from main_project.spellchecker_ml import MalayalamSpellChecker
+from main_project.spellchecker_ml import MalayalamSpellChecker, HindiSpellChecker
+from main_project.pycache_cleaner import delete_pycache_dirs
 
 app = FastAPI(title="Indic Spellchecker API")
+
+@app.on_event("startup")
+def clean_pycache_on_startup():
+    delete_pycache_dirs()
+
+@app.on_event("shutdown")
+def clean_pycache_on_shutdown():
+    delete_pycache_dirs()
 
 SUPPORTED_LANGUAGES = {
     'ml': {
         'name': 'Malayalam',
         'spellchecker': MalayalamSpellChecker(),
+    },
+    'hi': {
+        'name': 'Hindi',
+        'spellchecker': HindiSpellChecker(),
     },
     # Add more languages here in the future
 }

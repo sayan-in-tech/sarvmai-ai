@@ -10,8 +10,8 @@ from fastapi import Request
 import pathlib
 
 # Import the local spellchecker module (to be created)
-from main_project.spellchecker_ml import MalayalamSpellChecker, HindiSpellChecker
-from main_project.pycache_cleaner import delete_pycache_dirs
+from spellchecker_ml import MalayalamSpellChecker, HindiSpellChecker
+from pycache_cleaner import delete_pycache_dirs
 
 app = FastAPI(title="Indic Spellchecker API")
 

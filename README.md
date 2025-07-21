@@ -1,3 +1,6 @@
+# 🚀 Deploy on Render.com
+**Deployed Link** on: [Spelling Checker](https://sarvmai-ai.onrender.com)
+
 # Indic Spellchecker Web App
 
 A modern, multi-language spellchecker web service for Indic languages (Malayalam & Hindi), built with FastAPI. Sleek dark-mode web UI included!
@@ -84,42 +87,3 @@ POST /check_and_suggest
 ```
 
 ---
-
-## 🚀 Deploy on Render.com
-
-1. **Push your code to GitHub.**
-2. **Create a new Web Service** on [Render](https://render.com/):
-   - **Build Command:** `pip install -r requirements.txt`
-   - **Start Command:** `uvicorn spellchecker_app:app --host 0.0.0.0 --port $PORT`
-3. **Make sure your `data/`, `templates/`, and `static/` folders are committed!**
-4. **Visit your Render URL** to use the app online.
-
----
-
-## 📝 Adding More Languages
-- Add a new rootwords file (e.g., `ta_rootwords.txt` for Tamil) in `data/`.
-- Add a new class in `spellchecker_ml.py` (copy the pattern for Hindi/Malayalam).
-- Register it in `spellchecker_app.py` under `SUPPORTED_LANGUAGES`.
-- Enable it in the UI dropdown in `templates/index.html`.
-
----
-
-## 🐞 Troubleshooting
-- **FileNotFoundError:** Make sure your `data/` folder and rootwords files exist and are committed.
-- **ModuleNotFoundError:** Check your imports and run `uvicorn` from the correct directory.
-- **Render.com 404/502:** Check logs, ensure all files are present, and your start command is correct.
-- **Web UI not updating:** Hard refresh your browser (Ctrl+Shift+R).
-
----
-
-## 🙏 Credits
-- [FastAPI](https://fastapi.tiangolo.com/)
-- [marisa-trie](https://github.com/pytries/marisa-trie)
-- [difflib](https://docs.python.org/3/library/difflib.html)
-- [SCOWL Hindi Wordlist](https://github.com/kaustubhhiware/scowl-hindi-wordlist) (for Hindi rootwords)
-- [LibIndic](https://github.com/libindic/libindic) (for inspiration)
-
----
-
-## 💡 License
-MIT or your preferred license. 
